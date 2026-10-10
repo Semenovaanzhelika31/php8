@@ -1,11 +1,18 @@
 <?php
+
 namespace MVC\Decorators;
 
 abstract class DecoratorFactory
 {
-    public static function create(string $class, object $model)
+    public static function create(string $class, object $model, string $type = 'html')
     {
-        $cls = 'MVC\\Decorators\\' . ucfirst($class) . 'Decorator';
+
+        if ($type === 'html' || $type === 'rss') {
+            $cls = 'MVC\\Decorators\\' . ucfirst($class) . 'Decorator';
+        } else {
+            $cls = 'MVC\\Decorators\\' . ucfirst($class) . ucfirst($type) . 'Decorator';
+        }
+
         return new $cls($model);
     }
 

@@ -1,0 +1,10 @@
+{
+    "require-dev": {
+        "smeghead/php-class-diagram": "^1.6"
+    },
+    "autoload": {
+        "classmap": [
+            "patterns/"
+        ]
+    }
+}

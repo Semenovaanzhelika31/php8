@@ -13,7 +13,7 @@ class Controller
         $this->router = Router::parse($path);
         $class = 'MVC\\Models\\' . ucfirst($this->router->model);
         $this->model = new $class();
-        if ($this->router->id) {
+        if ($this->router->id !== null) {
             $this->model = $this->model->collection[$this->router->id];
         }
     }
@@ -24,7 +24,8 @@ class Controller
         $class = substr($class, strrpos($class, '\\') + 1);
         $decorator = \MVC\Decorators\DecoratorFactory::create(
             $class,
-            $this->model);
+            $this->model,
+            $this->router->ext ?? 'html');
         $view = \MVC\Views\ViewFactory::create(
             $this->router->ext,
             $class,
